@@ -4,6 +4,7 @@
   "description": "First node app",
   "main": "app.js",
   "scripts": {
+    "start": "parcel index.html",
     "test": "test"
   },
   "author": "rutvikjaiswal",
@@ -14,6 +15,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "process": "^0.11.10"
   }
 }

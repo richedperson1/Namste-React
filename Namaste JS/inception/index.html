@@ -17,11 +17,23 @@
 <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
 <script>
-    const h1Tag2 = React.createElement("h1", { id: "Innerh1Tag first" }, "Hello world");
+    const h1Tag2 = React.createElement("h1", {
+        id: "Innerh1Tag first",
+        key: "h1Tag2"
+    }, "Hello world");
+
+
+    const h11Tag2 = React.createElement("h1", {
+        id: "h11",
+        key: "H11"
+
+    }, "Hello world");
 
     const h1Tag = React.createElement("div", {
-        class: "Insidediv"
-    }, h1Tag2);
+        className: "Insidediv"
+    },
+        [h11Tag2, h1Tag2]
+    );
     const root = document.getElementById("main");
 
     let reactAPP = ReactDOM.createRoot(document.getElementById("main"))
