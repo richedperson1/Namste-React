@@ -23,6 +23,7 @@ function FunctionComponent1() {
         </div>
     )
 };
+
 let reactAPP = ReactDOM.createRoot(document.getElementById("main"));
 
 let priceOfKela = 20;
@@ -31,7 +32,4 @@ function Comp() {
     return (<h1>{whatIs} {priceOfKela} == {console.log("Hello world")} As usual we can call the function using component call</h1>);
 }
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
 reactAPP.render(<Comp />);
-// let firstElement = functionComponent1();
-// reactAPP.render(<functionComponent1 />);
