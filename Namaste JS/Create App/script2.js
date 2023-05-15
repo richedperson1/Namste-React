@@ -1882,28 +1882,28 @@ const HeaderCreate = () => {
 }
 // Restaurant card component: Image, name, cuisine
 
-function createSingleCard(allData) {
+function CreateSingleCard(allData) {
+    console.log(allData);
+    allData = allData.props;
     const imageURL = urlData + allData.data.cloudinaryImageId;
-    console.log(imageURL);
     return (
         <>
-            <img src={imageURL} />
-            <p >Address : {allData.data.address}</p>
-            <p >Price : {allData.data.costForTwoString}</p>
-            <p >Rating : {allData.data.avgRating} 🌟</p>
+            <img src={imageURL} key = {allData.data.key+"image"}/>
+            <p key={allData.data.id+"_add"} >Address : {allData.data.address}</p>
+            <p key={allData.data.id+"_para"}>Price : {allData.data.costForTwoString}</p>
+            <p key={allData.data.id+"_rating"}>Rating : {allData.data.avgRating} 🌟</p>
         </>
     );
 }
 
 function BodyTags() {
     return (
-        <div className="dish-containers">
-            {restaurantList.map((val) => {
-                return (
-                    <div className="dish-card">
-                        {
-                            createSingleCard(val)
-                        }
+            <div className="dish-containers">
+            {              
+            restaurantList.map((val)=>{
+                return(
+                    <div className="dish-card" key={val.data.id+"main-div"}>
+                        <CreateSingleCard props = {val} hello = {"actual"}/>
                     </div>
                 )
             })}
@@ -1920,7 +1920,7 @@ const FooterElement = () => {
     )
 }
 const Footer = () => {
-    return FooterElement()
+    return FooterElement();
 }
 
 // AppLayout component to show: Header, Body, Footer
