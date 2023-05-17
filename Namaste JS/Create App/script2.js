@@ -1882,16 +1882,21 @@ const HeaderCreate = () => {
 }
 // Restaurant card component: Image, name, cuisine
 
-function CreateSingleCard(allData) {
-    console.log(allData);
-    allData = allData.props;
-    const imageURL = urlData + allData.data.cloudinaryImageId;
+function CreateSingleCard({
+    name,
+    address,
+    costForTwoString,
+    avgRating,
+    cloudinaryImageId,
+    id
+}) {
+    const imageURL = urlData + cloudinaryImageId;
     return (
         <>
-            <img src={imageURL} key = {allData.data.key+"image"}/>
-            <p key={allData.data.id+"_add"} >Address : {allData.data.address}</p>
-            <p key={allData.data.id+"_para"}>Price : {allData.data.costForTwoString}</p>
-            <p key={allData.data.id+"_rating"}>Rating : {allData.data.avgRating} 🌟</p>
+            <img src={imageURL} key = {id+"image"}/>
+            <p key={id+"_add"} >Address : {address}</p>
+            <p key={id+"_para"}>Price : {costForTwoString}</p>
+            <p key={id+"_rating"}>Rating : {avgRating} 🌟</p>
         </>
     );
 }
@@ -1903,7 +1908,7 @@ function BodyTags() {
             restaurantList.map((val)=>{
                 return(
                     <div className="dish-card" key={val.data.id+"main-div"}>
-                        <CreateSingleCard props = {val} hello = {"actual"}/>
+                        <CreateSingleCard {...val.data}/>
                     </div>
                 )
             })}
