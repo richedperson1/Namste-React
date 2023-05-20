@@ -115,7 +115,7 @@ function selectedElement(searchTxt, restoDetails) {
   return -1;
 }
 function BodyTags() {
-  const [searchTxt, setseachTxt] = useState();
+  const [searchTxt, etseachTxt] = useState();
 
   const [restaurantList, setResto] = useState(restoEle);
   return (
@@ -125,7 +125,7 @@ function BodyTags() {
           type="text"
           value={searchTxt}
           onChange={(e) => {
-            setseachTxt(e.target.value);
+            etseachTxt(e.target.value);
           }}
         />
         <button
@@ -142,6 +142,7 @@ function BodyTags() {
         <button
           className="searchBar pointer"
           onClick={() => {
+            etseachTxt("");
             setResto(restoEle);
           }}
         >
