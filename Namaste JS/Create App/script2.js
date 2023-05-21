@@ -97,14 +97,30 @@ function selectedElement(searchTxt, restoDetails) {
   return secondSelect();
 }
 
+const swiggyAPICall = async () => {
+  const swiggyURL =
+    "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING";
+  const swiggyData = await fetch(swiggyURL);
+  const swiggyJson = await swiggyData.json();
+  return swiggyJson;
+};
+
 function BodyTags() {
   const [searchTxt, etseachTxt] = useState();
 
   const [restaurantList, setResto] = useState(restoEle);
 
+  const [restoFinal, setRestoFinal] = useState(restaurantList);
+
   useEffect(() => {
-    console.log("Rendering use Effect");
-  }, [restaurantList]);
+    console.log("Staring call", restoFinal);
+    const swiggyCall = swiggyAPICall();
+    swiggyCall.then((val) => {
+      const apiData = val?.data?.cards[2]?.data.data.cards;
+      setResto(apiData);
+    });
+  }, []);
+
   return (
     <>
       <div className="search-container">
@@ -113,10 +129,13 @@ function BodyTags() {
           value={searchTxt}
           onChange={(e) => {
             const searchInput = e.target.value;
-            etseachTxt(e.target.value);
+            etseachTxt(searchInput);
             if (searchInput != "") {
               updatedList = selectedElement(searchInput, restoEle);
               setResto(updatedList);
+            } else {
+              console.log(restaurantList);
+              setResto(restoFinal);
             }
           }}
         />
@@ -124,6 +143,8 @@ function BodyTags() {
           className="searchBar pointer"
           onClick={(e) => {
             const foundEle = selectedElement(searchTxt, restaurantList);
+            console.log("Modified list", restaurantList);
+            console.log("Second resto list", restoFinal);
             if (typeof foundEle == "object") {
               setResto(foundEle);
             }
@@ -135,7 +156,7 @@ function BodyTags() {
           className="searchBar pointer"
           onClick={() => {
             etseachTxt("");
-            setResto(restoEle);
+            setResto(restoFinal);
           }}
         >
           ❌
