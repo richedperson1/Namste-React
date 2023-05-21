@@ -1,7 +1,7 @@
 // ## Namaste React Course by Akshay Saini
 // Chapter 04 - Talk is Cheap, show me the code
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { restaurantList as restoEle } from "./content";
 
@@ -95,29 +95,16 @@ function selectedElement(searchTxt, restoDetails) {
     return elementFound;
   }
   return secondSelect();
-
-  const sizeArr = restoDetails.length;
-  let newResto = [];
-  let flag = false;
-  for (let i = 0; i < sizeArr; i++) {
-    const firstInd = restoDetails[i].data;
-    if (
-      searchTxt &&
-      firstInd.name.toLowerCase().search(searchTxt.toLowerCase()) != -1
-    ) {
-      flag = true;
-      newResto.push(restoDetails[i]);
-    }
-  }
-  if (flag == true) {
-    return newResto;
-  }
-  return -1;
 }
+
 function BodyTags() {
   const [searchTxt, etseachTxt] = useState();
 
   const [restaurantList, setResto] = useState(restoEle);
+
+  useEffect(() => {
+    console.log("Rendering use Effect");
+  }, [restaurantList]);
   return (
     <>
       <div className="search-container">
@@ -125,7 +112,12 @@ function BodyTags() {
           type="text"
           value={searchTxt}
           onChange={(e) => {
+            const searchInput = e.target.value;
             etseachTxt(e.target.value);
+            if (searchInput != "") {
+              updatedList = selectedElement(searchInput, restoEle);
+              setResto(updatedList);
+            }
           }}
         />
         <button
