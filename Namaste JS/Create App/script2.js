@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { restaurantList as restoEle } from "./content";
+import { NotFound } from "./notFound";
 
 /* My Food App structure will look like this, 
             1) Header
@@ -118,8 +119,14 @@ function BodyTags() {
     swiggyCall.then((val) => {
       const apiData = val?.data?.cards[2]?.data.data.cards;
       setResto(apiData);
+      setRestoFinal(apiData);
     });
   }, []);
+
+  // if (restaurantList.length == 0) {
+  //   return <FoodNotFOund />;
+  // }
+  const restoLengthBool = restaurantList.length > 0 ? true : false;
 
   return (
     <>
@@ -162,14 +169,19 @@ function BodyTags() {
           ❌
         </button>
       </div>
+
       <div className="dish-containers">
-        {restaurantList.map((val) => {
-          return (
-            <div className="dish-card" key={val.data.id + "main-div"}>
-              <CreateSingleCard {...val.data} />
-            </div>
-          );
-        })}
+        {restoLengthBool ? (
+          restaurantList.map((val) => {
+            return (
+              <div className="dish-card" key={val.data.id + "main-div"}>
+                <CreateSingleCard {...val.data} />
+              </div>
+            );
+          })
+        ) : (
+          <NotFound />
+        )}
       </div>
     </>
   );
