@@ -66,6 +66,7 @@ const HeaderCreate = () => {
     </div>
   );
 };
+
 // Restaurant card component: Image, name, cuisine
 
 function CreateSingleCard({
