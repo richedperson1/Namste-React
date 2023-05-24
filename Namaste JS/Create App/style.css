@@ -102,3 +102,17 @@ p {
 .pointer{
     cursor: pointer;
 }
+
+
+/* not founds data */
+
+.not-found-data{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.not-found-data img{
+    border-radius: 50%;
+}

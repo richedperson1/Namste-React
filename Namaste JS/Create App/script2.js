@@ -115,7 +115,7 @@ function BodyTags() {
   const [restoFinal, setRestoFinal] = useState(restaurantList);
 
   useEffect(() => {
-    console.log("Staring call", restoFinal);
+    // console.log("Staring call", restoFinal);
     const swiggyCall = swiggyAPICall();
     swiggyCall.then((val) => {
       const apiData = val?.data?.cards[2]?.data.data.cards;
@@ -124,9 +124,6 @@ function BodyTags() {
     });
   }, []);
 
-  // if (restaurantList.length == 0) {
-  //   return <FoodNotFOund />;
-  // }
   const restoLengthBool = restaurantList.length > 0 ? true : false;
 
   return (
@@ -142,7 +139,6 @@ function BodyTags() {
               updatedList = selectedElement(searchInput, restoEle);
               setResto(updatedList);
             } else {
-              console.log(restaurantList);
               setResto(restoFinal);
             }
           }}
